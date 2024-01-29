@@ -1,3 +1,51 @@
-[gd_scene format=3 uid="uid://civdtaqwpp0dr"]
+[gd_scene load_steps=10 format=3 uid="uid://civdtaqwpp0dr"]
+
+[ext_resource type="Texture2D" uid="uid://d2cl5wui6y0b3" path="res://Shared Assets/Textures/checker512.png" id="1_8h5xx"]
+[ext_resource type="PackedScene" uid="uid://k453ea32p0cw" path="res://Objects/Characters/Players/Witch/witch.tscn" id="1_xq5w2"]
+[ext_resource type="PackedScene" uid="uid://b4cbtp0di0qgc" path="res://Objects/Global/Cursor/cursor.tscn" id="2_cfbr8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7eipp"]
+size = Vector3(25, 0.1, 25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7l8ku"]
+albedo_texture = ExtResource("1_8h5xx")
+uv1_scale = Vector3(2, 2, 2)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_runa7"]
+material = SubResource("StandardMaterial3D_7l8ku")
+size = Vector2(25, 25)
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_r8sr3"]
+
+[sub_resource type="Sky" id="Sky_gxi53"]
+sky_material = SubResource("PhysicalSkyMaterial_r8sr3")
+
+[sub_resource type="Environment" id="Environment_8e5vn"]
+background_mode = 2
+sky = SubResource("Sky_gxi53")
 
 [node name="Test" type="Node3D"]
+
+[node name="Floor" type="StaticBody3D" parent="."]
+collision_layer = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+shape = SubResource("BoxShape3D_7eipp")
+
+[node name="FloorMesh" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("PlaneMesh_runa7")
+skeleton = NodePath("../..")
+
+[node name="Witch" parent="." instance=ExtResource("1_xq5w2")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 1, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8e5vn")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 3, 0)
+shadow_enabled = true
+
+[node name="Cursor" parent="." instance=ExtResource("2_cfbr8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0820043, 0)

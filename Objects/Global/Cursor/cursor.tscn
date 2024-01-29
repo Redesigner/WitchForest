@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4cbtp0di0qgc"]
+
+[ext_resource type="Script" path="res://Objects/Global/Cursor/cursor.gd" id="1_jvn3p"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6qihq"]
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(0.905882, 0.341176, 0.262745, 1)
+disable_receive_shadows = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_sibkl"]
+material = SubResource("StandardMaterial3D_6qihq")
+height = 0.1
+rings = 1
+cap_top = false
+cap_bottom = false
+
+[node name="Cursor" type="Node3D"]
+script = ExtResource("1_jvn3p")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_sibkl")
