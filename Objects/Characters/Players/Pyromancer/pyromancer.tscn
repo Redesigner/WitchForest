@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ce6at6mnv088l"]
+
+[ext_resource type="PackedScene" uid="uid://k453ea32p0cw" path="res://Objects/Characters/Players/Witch/witch.tscn" id="1_sq12l"]
+
+[node name="Pyromancer" type="Node"]
+
+[node name="Witch" parent="." instance=ExtResource("1_sq12l")]

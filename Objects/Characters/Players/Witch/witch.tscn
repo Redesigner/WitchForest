@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://k453ea32p0cw"]
+[gd_scene load_steps=5 format=3 uid="uid://k453ea32p0cw"]
 
 [ext_resource type="Script" path="res://Objects/Characters/Players/Witch/witch.gd" id="1_vn3up"]
+[ext_resource type="PackedScene" uid="uid://b4cbtp0di0qgc" path="res://Objects/Global/Cursor/cursor.tscn" id="2_kqpx5"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r4kjj"]
 
@@ -23,3 +24,8 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 20)
 fov = 30.0
 size = 10.0
+
+[node name="Cursor" parent="." instance=ExtResource("2_kqpx5")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.19209e-07, 0)
+visible = false
