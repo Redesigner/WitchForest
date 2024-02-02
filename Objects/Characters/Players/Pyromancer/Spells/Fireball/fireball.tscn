@@ -7,6 +7,8 @@ radius = 0.25
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fk5mr"]
 albedo_color = Color(0.752941, 0.345098, 0.160784, 1)
+emission_enabled = true
+emission = Color(1, 0.564706, 0.403922, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_og4gy"]
 material = SubResource("StandardMaterial3D_fk5mr")

@@ -51,3 +51,7 @@ primary_action={
 
 3d_physics/layer_1="Player"
 3d_physics/layer_2="Visible"
+
+[rendering]
+
+anti_aliasing/quality/use_taa=true

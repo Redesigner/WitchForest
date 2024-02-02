@@ -2,22 +2,20 @@
 
 [ext_resource type="Script" path="res://Objects/Characters/Players/Witch/witch.gd" id="1_vn3up"]
 [ext_resource type="PackedScene" uid="uid://b4cbtp0di0qgc" path="res://Objects/Global/Cursor/cursor.tscn" id="2_kqpx5"]
+[ext_resource type="PackedScene" uid="uid://b0fsr7m6x4i4k" path="res://Objects/Characters/Players/Witch/witch.blend" id="2_vrw5b"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r4kjj"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_ecduq"]
 
 [node name="Witch" type="CharacterBody3D"]
 script = ExtResource("1_vn3up")
 
+[node name="witch" parent="." instance=ExtResource("2_vrw5b")]
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_r4kjj")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("CapsuleMesh_ecduq")
-
 [node name="CameraArm" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 0.939692, 0.34202, 0, -0.34202, 0.939692, 0, 0.5, 0)
 
 [node name="Camera" type="Camera3D" parent="CameraArm"]
 unique_name_in_owner = true

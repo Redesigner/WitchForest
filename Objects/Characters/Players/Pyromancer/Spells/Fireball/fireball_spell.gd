@@ -10,5 +10,6 @@ func cast(source:Witch, location:Vector3):
 	var fireball:Node3D = fireball_scene.instantiate()
 	get_tree().root.add_child(fireball)
 	fireball.global_position = witch_position + fireball_direction_2D
-	fireball.destination = location
+	fireball.destination = location + Vector3(0.0, 1.0, 0.0)
 	fireball.speed = fireball_speed
+	fireball.source = source
