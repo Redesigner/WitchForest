@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://k453ea32p0cw"]
+[gd_scene load_steps=6 format=3 uid="uid://k453ea32p0cw"]
 
 [ext_resource type="Script" path="res://Objects/Characters/Players/Witch/witch.gd" id="1_vn3up"]
 [ext_resource type="PackedScene" uid="uid://b4cbtp0di0qgc" path="res://Objects/Global/Cursor/cursor.tscn" id="2_kqpx5"]
 [ext_resource type="PackedScene" uid="uid://b0fsr7m6x4i4k" path="res://Objects/Characters/Players/Witch/witch.blend" id="2_vrw5b"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_b6bsm"]
+radius = 0.8
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r4kjj"]
 
@@ -10,6 +13,19 @@
 script = ExtResource("1_vn3up")
 
 [node name="witch" parent="." instance=ExtResource("2_vrw5b")]
+
+[node name="InteractArea" type="Area3D" parent="witch"]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="witch/InteractArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 1)
+shape = SubResource("SphereShape3D_b6bsm")
+
+[node name="PickupHandle" type="Node3D" parent="witch"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.5)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_r4kjj")
