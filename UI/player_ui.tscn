@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://lwbg1b7e4t1"]
+
+[ext_resource type="Script" path="res://UI/player_ui.gd" id="1_efdda"]
+
+[node name="PlayerUi" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_efdda")
+
+[node name="ControllerHints" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 208.0
+offset_bottom = 48.0
+text = "Press 'E' to pick up item"

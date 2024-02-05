@@ -1,7 +1,11 @@
 class_name Witch
 extends CharacterBody3D
 
+@onready var cursor:Node3D = %Cursor
 @onready var camera:Camera3D = %Camera
+@onready var player_ui:Control = %PlayerUi
+@onready var interact_area:Area3D = %InteractArea
+@onready var pickup_handle:Node3D = %PickupHandle
 
 @export_group("Movement")
 @export var max_speed:float = 4.0
@@ -37,7 +41,7 @@ func _physics_process(delta):
 
 func _input(event):
 	if (event.is_action_pressed("primary_action")):
-		primary_spell.try_cast(self, %Cursor.global_position)
+		primary_spell.try_cast(self, cursor.global_position)
 		return
 	
 	if (event.is_action_pressed("interact")):
@@ -58,18 +62,18 @@ func interact():
 		pickup_item()
 
 func pickup_item():
-	var overlapping_items:Array[Node3D] = %InteractArea.get_overlapping_bodies()
-	print("Found %d items overlapping" % overlapping_items.size())
+	var overlapping_items:Array[Node3D] = interact_area.get_overlapping_bodies()
 	for node:Node3D in overlapping_items:
 		if (node is Pickup):
 			held_item = node
-			held_item.reparent(%PickupHandle)
+			held_item.reparent(pickup_handle)
 			held_item.position = Vector3()
 			held_item.rotation = Vector3()
 			
 			held_item.axis_lock_linear_x = true
 			held_item.axis_lock_linear_y = true
 			held_item.axis_lock_linear_z = true
+			return
 
 func throw_held_item():
 	held_item.axis_lock_linear_x = false
@@ -79,3 +83,14 @@ func throw_held_item():
 	var impulse:Vector3 = mesh.global_basis.z * 2.0 + velocity * 2.0
 	held_item.apply_impulse(impulse)
 	held_item = null
+
+func item_interact_preview(item_in_area:Node3D):
+	update_control_tips()
+
+func update_control_tips():
+	var overlapping_items:Array[Node3D] = interact_area.get_overlapping_bodies()
+	for node:Node3D in overlapping_items:
+		if (node is Pickup):
+			player_ui.set_control_tips(node.preview_text)
+			return
+	player_ui.hide_control_tips()

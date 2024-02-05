@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://k453ea32p0cw"]
+[gd_scene load_steps=7 format=3 uid="uid://k453ea32p0cw"]
 
 [ext_resource type="Script" path="res://Objects/Characters/Players/Witch/witch.gd" id="1_vn3up"]
 [ext_resource type="PackedScene" uid="uid://b4cbtp0di0qgc" path="res://Objects/Global/Cursor/cursor.tscn" id="2_kqpx5"]
 [ext_resource type="PackedScene" uid="uid://b0fsr7m6x4i4k" path="res://Objects/Characters/Players/Witch/witch.blend" id="2_vrw5b"]
+[ext_resource type="PackedScene" uid="uid://lwbg1b7e4t1" path="res://UI/player_ui.tscn" id="4_qs65p"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_b6bsm"]
 radius = 0.8
@@ -43,3 +44,9 @@ size = 10.0
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.19209e-07, 0)
 visible = false
+
+[node name="PlayerUi" parent="." instance=ExtResource("4_qs65p")]
+unique_name_in_owner = true
+
+[connection signal="body_entered" from="witch/InteractArea" to="." method="item_interact_preview"]
+[connection signal="body_exited" from="witch/InteractArea" to="." method="item_interact_preview"]
