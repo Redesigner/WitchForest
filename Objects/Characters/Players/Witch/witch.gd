@@ -6,6 +6,7 @@ extends CharacterBody3D
 @onready var player_ui:Control = %PlayerUi
 @onready var interact_area:Area3D = %InteractArea
 @onready var pickup_handle:Node3D = %PickupHandle
+@onready var inventory:Node = %Inventory
 
 @export_group("Movement")
 @export var max_speed:float = 4.0
@@ -48,6 +49,10 @@ func _input(event):
 		interact()
 		return
 	
+	if (event.is_action_pressed("stash")):
+		stash_held_item()
+		return
+		
 	if (event.is_action_pressed("ui_cancel")):
 		get_tree().quit()
 		return
@@ -84,13 +89,36 @@ func throw_held_item():
 	held_item.apply_impulse(impulse)
 	held_item = null
 
-func item_interact_preview(item_in_area:Node3D):
+func item_interact_preview(_item_in_area:Node3D):
 	update_control_tips()
 
 func update_control_tips():
+	if (carrying_item()):
+		player_ui.set_control_tips("Press 'Q' to stash the item in your pouch.")
+		return
 	var overlapping_items:Array[Node3D] = interact_area.get_overlapping_bodies()
 	for node:Node3D in overlapping_items:
 		if (node is Pickup):
 			player_ui.set_control_tips(node.preview_text)
 			return
 	player_ui.hide_control_tips()
+
+func stash_held_item():
+	if (held_item == null):
+		var withdrawn_item:InventoryItem = inventory.withdraw_current_item()
+		if (withdrawn_item == null):
+			return
+		held_item = ResourceLoader.load(withdrawn_item.item_scene).instantiate()
+		pickup_handle.add_child(held_item)
+		held_item.position = Vector3()
+		held_item.rotation = Vector3()
+
+		held_item.axis_lock_linear_x = true
+		held_item.axis_lock_linear_y = true
+		held_item.axis_lock_linear_z = true
+		return
+		
+	if (inventory.add_item_to_current_slot(held_item.item_resource)):
+		held_item.queue_free()
+		held_item = null
+		update_control_tips()

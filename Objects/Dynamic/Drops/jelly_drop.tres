@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=3 format=3 uid="uid://bxmamf66iysy7"]
+
+[ext_resource type="Texture2D" uid="uid://cb1ju51nnkerl" path="res://icon.svg" id="1_kol6j"]
+[ext_resource type="Script" path="res://Objects/Dynamic/Drops/inventory_item.gd" id="1_pgg6q"]
+
+[resource]
+script = ExtResource("1_pgg6q")
+display_image = ExtResource("1_kol6j")
+display_name = "Jelly Drop"
+item_scene = "res://Objects/Dynamic/Drops/jelly_drop.tscn"
